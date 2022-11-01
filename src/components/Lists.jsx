@@ -11,7 +11,9 @@ function Lists() {
   const booksArr = [
     { _id: 123, title: "El Hobbit", author: "Tolkien" },
     { _id: 999, title: "El Hobbit", author: "Tolkien" },
-    { _id: 456, title: "The Clone Wars", author: "No lo sé" }
+    { _id: 456, title: "The Clone Wars", author: "No lo sé" },
+    { _id: 536, title: "The Clone Wars", author: "No lo sé" },
+    { _id: 356, title: "The Clone Wars", author: "No lo sé" }
   ]
 
   return (
@@ -35,6 +37,7 @@ function Lists() {
             <div key={eachElement._id} className="card">
               <h5>{eachElement.title}</h5>
               <p>{eachElement.author}</p>
+              <hr />
             </div>
           )
         })}
