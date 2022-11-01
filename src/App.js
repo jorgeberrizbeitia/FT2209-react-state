@@ -3,6 +3,7 @@ import './App.css';
 import Lists from './components/Lists';
 import Events from './components/Events';
 import Counter from './components/Counter';
+import WizardsList from './components/WizardsList';
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
 
       {/* <Events /> */}
 
-      <Counter />
+      {/* <Counter /> */}
+
+      <WizardsList />
 
     </div>
   );
