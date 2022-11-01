@@ -7,10 +7,6 @@ function WizardsList() {
   // const initialList = allWizardsArr.slice(0, 3)
   // const [list, setList] = useState(allWizardsArr.slice(0, 3))
   const [list, setList] = useState([])
-
-  // 4. que cada elemento tenga su boton para borrar
-  
-  
   
   // 2. que el el boton de añadir agregue un elemento aleatorio del json
   const añadirMagos = () => {
@@ -18,7 +14,7 @@ function WizardsList() {
     // 2.1 buscar un elemento aleatorio del json
     const randomIndex = Math.floor(Math.random() * allWizardsArr.length)
     const wizardAleatorio = allWizardsArr[randomIndex]
-    console.log(wizardAleatorio)
+    // console.log(wizardAleatorio)
 
 
     // 2.2 añadir ese elemento al estado de list
@@ -40,6 +36,8 @@ function WizardsList() {
 
     // forma más reducida
     // setList([...list, wizardAleatorio])
+    // MEGA BONUS:
+    // que los elementos no puedan estar duplicados
   }
 
   // 3. el boton de ordenar
@@ -60,6 +58,24 @@ function WizardsList() {
 
   }
 
+  // 4. que cada elemento tenga su boton para borrar
+  const borrarWizard = (wizardId) => {
+    console.log("tratando de borrar a:", wizardId)
+    // necesitamos informacion del elemento clickado
+
+    // 1. sacar al elemento del array
+    const filteredList = list.filter((eachWizard) => {
+      if (eachWizard.id === wizardId) {
+        return false // no lo incluyas
+      } else {
+        return true // incluyelo
+      }
+    })
+
+    // 2. actualizar el estado
+    setList(filteredList)
+    // setList => para pasar el nuevo array menos el elemento clickado
+  }
 
   return (
     <div>
@@ -71,11 +87,15 @@ function WizardsList() {
 
       {/* ... aqui listamos los personajes */}
       {/* usamos el slice para tener x cantidad de elementos de ese array */}
-      {list.map((eachWizard) => {
+      {list.map((eachWizard, index) => {
           return (
             <div key={eachWizard.id}>
+              <hr />
               <h5>{eachWizard.name}</h5>
               <p>{eachWizard.description}</p>
+              {/* <button onClick={borrarWizard}>Borrar</button> */}
+              {/* para agregar argumentos a una function de callback, se crea una funcion anonima envoltoria */}
+              <button onClick={() => borrarWizard(eachWizard.id)}>Borrar</button>
             </div>
           )
       })}
