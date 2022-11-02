@@ -10,11 +10,29 @@ function WizardsList() {
   
   // 2. que el el boton de añadir agregue un elemento aleatorio del json
   const añadirMagos = () => {
+
+    // si ya existen todos los elementos del json en la lista, no hagas nada
+    if (list.length === allWizardsArr.length) {
+      // ya estan todos los elementos, no hacemos más nada
+      return;
+    }
     
     // 2.1 buscar un elemento aleatorio del json
     const randomIndex = Math.floor(Math.random() * allWizardsArr.length)
     const wizardAleatorio = allWizardsArr[randomIndex]
     // console.log(wizardAleatorio)
+
+    const filteredWizard = list.filter((eachWiz) => {
+      return eachWiz.id === wizardAleatorio.id
+    })
+    console.log(filteredWizard)
+
+    // causar la recursion si el elemento ya existe
+    if (filteredWizard.length !== 0) {
+      console.log("elemento duplicado, haciendo una nueva recursion")
+      añadirMagos()
+      return; // deja de ejecutar la funcion actual.
+    }
 
 
     // 2.2 añadir ese elemento al estado de list
@@ -23,8 +41,8 @@ function WizardsList() {
     // como actualizamos el array y lo pasamos como argumento de setList
     // list = [1, 2, 3]
     // const copy = list.map((eachElem) => eachElem)
-    // const copy = structuredClone(list)
-    const copy = [...list]
+    const copy = structuredClone(list)
+    // const copy = [...list]
     // wizardAleatorio = 4
     copy.push(wizardAleatorio)
     // setList([1, 2, 3, 4])
@@ -82,7 +100,7 @@ function WizardsList() {
       
       <h3>Lista de personajes de Harry Potter</h3>
 
-      <button onClick={añadirMagos}>Añadir personaje</button>
+      <button disabled={list.length === allWizardsArr.length ? true : false} onClick={añadirMagos}>Añadir personaje</button>
       <button onClick={wizardOrder}>Ordenarlos</button>
 
       {/* ... aqui listamos los personajes */}
